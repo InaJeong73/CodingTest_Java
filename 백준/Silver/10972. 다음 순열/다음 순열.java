@@ -17,34 +17,23 @@ public class Main{
         for(int i=0;i<num;i++){
             numArr[i]=Integer.parseInt(st.nextToken());
         }
-        Stack<Integer>stack=new Stack<Integer>();
         boolean isLast=true;
         for(int i=num-1;i>=0;i--) {
         	if(i==num-1){
                 continue;
             }
         	 if(numArr[i]<numArr[i+1]) {
-        		 int min=MAX_N;
-                 int minj=0;
+                 int minIdx=i+1;
                  isLast=false;
                     for(int j=i+1;j<num;j++){
-                        if(numArr[i]<numArr[j]&&numArr[j]<min){
-                            min=numArr[j];
-                            minj=j;
+                        if(numArr[i]<numArr[j]&&numArr[j]<numArr[minIdx]){
+                            minIdx=j;
                         }
                     }
                     int temp=numArr[i];
-                    numArr[i]=min;
-                    numArr[minj]=temp;
-                    
-                    for(int j=i+1;j<num;j++){
-                         stack.push(numArr[j]);
-                    }
-                    int k=i+1;
-                    while(!stack.isEmpty()){
-                        numArr[k]=stack.pop();
-                        k++;
-                    }
+                    numArr[i]=numArr[minIdx];
+                    numArr[minIdx]=temp;
+                    reverse(numArr,i+1,num-1);
                     break;
                     }
         	 }
@@ -59,5 +48,14 @@ public class Main{
        }
        bw.flush();
        bw.close();
+    }
+    public static void reverse(int[]arr,int start,int end) {
+    	while(start<end) {
+    	int temp=arr[start];
+    	arr[start]=arr[end];
+    	arr[end]=temp;
+    	start++;
+    	end--;
+    	}
     }
 }
