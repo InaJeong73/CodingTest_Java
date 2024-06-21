@@ -1,0 +1,12 @@
+
+SELECT ID
+FROM ECOLI_DATA 
+WHERE PARENT_ID IN (#2세대를 찾아보자
+    SELECT ID
+    FROM ECOLI_DATA
+    WHERE PARENT_ID IN (
+        #1세대를 찾아보자
+        SELECT ID
+        FROM ECOLI_DATA 
+        WHERE PARENT_ID IS NULL
+        ));
