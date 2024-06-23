@@ -1,18 +1,14 @@
+import java.util.*;
 class Solution {
     public int solution(int[] nums) {
         int answer = 0;
-        int l=nums.length;
-        int selectNum=l/2;
-        boolean[]exist=new boolean[200001];
-        int count=0;
-        for(int i=0;i<l;i++){
-            if(!exist[nums[i]]) {
-                count++;
-                exist[nums[i]]=true;
-            }
+        //HashMap을 통해서 포켓몬 종류별로 총 몇마리가 있는지 count
+        HashMap<Integer,Integer>map=new HashMap<>();
+        int totalNum=nums.length;
+        for(int i=0;i<totalNum;i++){
+        map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
-        if(selectNum>=count)answer=count;
-        else answer=selectNum;
-        return answer;
+        if(map.size()<totalNum/2)return map.size();
+        else return totalNum/2;       
     }
 }
